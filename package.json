@@ -1,19 +1,21 @@
 {
-  "name": "browserosaurus",
-  "version": "17.3.0",
+  "name": "browseratops",
+  "version": "0.0.1",
   "description": "The browser prompter for macOS",
   "keywords": [
-    "macOS",
+    "windows",
     "Electron",
-    "Browser chooser"
+    "Browser chooser",
+    "Browser prompt",
+    "Browser selector",
+    "Open URL with"
   ],
-  "homepage": "https://wstone.io/browserosaurus",
   "bugs": {
-    "url": "https://github.com/will-stone/browserosaurus/issues"
+    "url": "https://github.com/riotrah/browseratops/issues"
   },
-  "repository": "https://github.com/will-stone/browserosaurus",
+  "repository": "https://github.com/riotrah/browseratops",
   "license": "GPL-3.0-only",
-  "author": "Will Stone",
+  "author": "Rayat Rahman",
   "main": ".webpack/main",
   "scripts": {
     "doctor": "npm run lint && npm run typecheck && npm run test",
@@ -26,11 +28,11 @@
     "notarize": "node ./scripts/notarize.js",
     "prepackage": "rimraf out",
     "package": "npm run package:arm && npm run package:intel",
-    "package:arm": "NODE_ENV=production electron-forge package --platform=darwin --arch=arm64",
-    "package:intel": "NODE_ENV=production electron-forge package --platform=darwin --arch=x64",
+    "package:arm": "cross-env NODE_ENV=production electron-forge package --platform=darwin --arch=arm64",
+    "package:intel": "cross-env NODE_ENV=production electron-forge package --platform=darwin --arch=x64",
     "prepare": "husky install",
     "release": "bump --commit \"chore: release v\" && npm run doctor && npm run package && npm run notarize && npm run make",
-    "start": "ELECTRON_DISABLE_SECURITY_WARNINGS=true TAILWIND_MODE=watch electron-forge start",
+    "start": "cross-env ELECTRON_DISABLE_SECURITY_WARNINGS=true TAILWIND_MODE=watch electron-forge start",
     "test": "jest",
     "typecheck": "tsc --noEmit --skipLibCheck"
   },
@@ -45,39 +47,16 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "appBundleId": "com.browserosaurus",
+        "appBundleId": "com.browseratops",
         "asar": true,
-        "appCategoryType": "public.app-category.developer-tools",
         "packageManager": "npm",
-        "extendInfo": "plist/Info.plist",
-        "osxSign": {
-          "gatekeeper-assess": false,
-          "hardened-runtime": true,
-          "entitlements": "plist/entitlements.mac.plist",
-          "entitlements-inherit": "plist/entitlements.mac.plist"
-        },
-        "icon": "src/shared/static/icon/icon.icns",
-        "protocols": [
-          {
-            "name": "HTTP link",
-            "schemes": [
-              "http",
-              "https"
-            ]
-          },
-          {
-            "name": "File",
-            "schemes": [
-              "file"
-            ]
-          }
-        ]
+        "icon": "src/shared/static/icon/app.ico"
       },
       "makers": [
         {
           "name": "@electron-forge/maker-zip",
           "platforms": [
-            "darwin"
+            "win"
           ]
         }
       ],
@@ -251,5 +230,5 @@
   "engines": {
     "node": ">=16.0.0"
   },
-  "productName": "Browserosaurus"
+  "productName": "Browseratops"
 }

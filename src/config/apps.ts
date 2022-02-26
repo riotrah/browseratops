@@ -72,6 +72,10 @@ export const apps = {
     name: 'Chrome',
     privateArg: '--incognito',
     logo: chrome,
+    win: {
+      path: 'C:\\Program Files\\Google\\Chrome\\Application',
+      filename: 'chrome.exe',
+    },
   },
   'com.google.Chrome.beta': {
     name: 'Chrome Beta',
@@ -96,6 +100,14 @@ export const apps = {
   'com.gab.Dissenter': {
     name: 'Dissenter',
     logo: dissenter,
+  },
+  'edge': {
+    name: 'Edge',
+    logo: edge,
+    win: {
+      path: 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application',
+      filename: 'msedge.exe',
+    },
   },
   'com.microsoft.edgemac': {
     name: 'Edge',
@@ -125,6 +137,10 @@ export const apps = {
     name: 'Firefox',
     privateArg: '--private-window',
     logo: firefox,
+    win: {
+      path: 'C:\\Program Files\\Mozilla Firefox',
+      filename: 'firefox.exe',
+    },
   },
   'org.mozilla.firefoxdeveloperedition': {
     name: 'Firefox Dev',
@@ -179,6 +195,10 @@ export const apps = {
   'com.operasoftware.OperaGX': {
     name: 'Opera GX',
     logo: operaGX,
+    win: {
+      path: 'C:\\Program Files\\Opera GX',
+      filename: 'opera.exe',
+    },
   },
   'com.opera.Neon': {
     name: 'Opera Neon',
@@ -225,6 +245,10 @@ export const apps = {
   'com.vivaldi.Vivaldi': {
     name: 'Vivaldi',
     logo: vivaldi,
+    win: {
+      path: 'C:\\Program Files\\Vivaldi\\Application',
+      filename: 'vivaldi.exe',
+    },
   },
   'com.vivaldi.Vivaldi.snapshot': {
     name: 'Vivaldi Snapshot',
