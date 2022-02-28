@@ -1,7 +1,7 @@
 {
   "name": "browseratops",
   "version": "0.0.1",
-  "description": "The browser prompter for macOS",
+  "description": "The browser prompter for windows ( and maybe macOS )",
   "keywords": [
     "windows",
     "Electron",
@@ -20,18 +20,25 @@
   "scripts": {
     "doctor": "npm run lint && npm run typecheck && npm run test",
     "icns": "cd ./src/shared/static/icon && ../../../../scripts/png2icns.sh icon.png",
+    "inspect": "npm run start -- --inspect-electron",
     "lint": "eslint . --ignore-path .gitignore",
     "list-apps": "ts-node ./scripts/listInstalledApps",
-    "make": "concurrently \"npm:make:*\" --kill-others-on-fail",
-    "make:arm": "electron-forge make --skip-package --arch=arm64",
-    "make:intel": "electron-forge make --skip-package --arch=x64",
+    "make": "run-script-os",
+    "make-darwin:arm": "electron-forge make --skip-package --arch=arm64",
+    "make-darwin:intel": "electron-forge make --skip-package --arch=x64",
+    "make:darwin": "concurrently \"npm:make-darwin:*\" --kill-others-on-fail",
+    "make:default": "electron-forge make --skip-package",
     "notarize": "node ./scripts/notarize.js",
     "prepackage": "rimraf out",
-    "package": "npm run package:arm && npm run package:intel",
-    "package:arm": "cross-env NODE_ENV=production electron-forge package --platform=darwin --arch=arm64",
-    "package:intel": "cross-env NODE_ENV=production electron-forge package --platform=darwin --arch=x64",
+    "package": "cross-env NODE_ENV=production electron-forge package",
+    "package:all": "cross-env NODE_ENV=production npm-run-all package:*",
+    "package:darwin:arm": "cross-env NODE_ENV=production electron-forge package --platform=darwin --arch=arm64",
+    "package:darwin:intel": "cross-env NODE_ENV=production electron-forge package --platform=darwin --arch=x64",
+    "package:win32": "cross-env NODE_ENV=production electron-forge package --platform=darwin --arch=arm64",
     "prepare": "husky install",
-    "release": "bump --commit \"chore: release v\" && npm run doctor && npm run package && npm run notarize && npm run make",
+    "release": "run-script-os",
+    "release:darwin": "bump --commit \"chore: release v\" && npm run doctor && npm run package && npm run notarize && npm run make",
+    "release:default": "bump --commit \"chore: release v\" && npm run doctor && npm run package && npm run make",
     "start": "cross-env ELECTRON_DISABLE_SECURITY_WARNINGS=true TAILWIND_MODE=watch electron-forge start",
     "test": "jest",
     "typecheck": "tsc --noEmit --skipLibCheck"
@@ -49,14 +56,38 @@
       "packagerConfig": {
         "appBundleId": "com.browseratops",
         "asar": true,
+        "appCategoryType": "public.app-category.developer-tools",
         "packageManager": "npm",
-        "icon": "src/shared/static/icon/app.ico"
+        "extendInfo": "plist/Info.plist",
+        "osxSign": {
+          "gatekeeper-assess": false,
+          "hardened-runtime": true,
+          "entitlements": "plist/entitlements.mac.plist",
+          "entitlements-inherit": "plist/entitlements.mac.plist"
+        },
+        "icon": "src/shared/static/icon/icon",
+        "protocols": [
+          {
+            "name": "HTTP link",
+            "schemes": [
+              "http",
+              "https"
+            ]
+          },
+          {
+            "name": "File",
+            "schemes": [
+              "file"
+            ]
+          }
+        ]
       },
       "makers": [
         {
           "name": "@electron-forge/maker-zip",
           "platforms": [
-            "win"
+            "darwin",
+            "win32"
           ]
         }
       ],
@@ -101,6 +132,12 @@
       "@will-stone/eslint-config/prettier"
     ],
     "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "auto"
+        }
+      ],
       "unicorn/prefer-top-level-await": "off"
     }
   },
@@ -196,7 +233,7 @@
     "css-loader": "^6.6.0",
     "electron": "^16.0.9",
     "electron-notarize": "^1.1.1",
-    "eslint": "^8.9.0",
+    "eslint": "^8.10.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jest": "^26.1.1",
     "eslint-plugin-jsx-a11y": "^6.5.1",
@@ -212,12 +249,14 @@
     "jest": "^27.5.1",
     "lint-staged": "^12.3.4",
     "mini-css-extract-plugin": "^2.5.3",
+    "npm-run-all2": "^5.0.2",
     "postcss": "^8.4.6",
     "postcss-cli": "^9.1.0",
     "postcss-import": "^14.0.2",
     "postcss-loader": "^6.2.1",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
+    "run-script-os": "^1.1.6",
     "style-loader": "^3.3.1",
     "tailwindcss": "^3.0.23",
     "ts-jest": "^27.1.3",
