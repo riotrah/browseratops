@@ -1,49 +1,47 @@
 <img src="./designs/icon_squooshed.png" alt="logo" width="100" height="100" align="right" />
 
-# Browserosaurus
+# Browseratops
 
-Browserosaurus is an open-source (GPLv3 license), browser prompter for macOS. It
-works by setting itself as the default browser; any clicked links in non-browser
-apps are now sent to Browserosaurus where you are presented with a menu of all
-your installed browsers. You may now decide which app you’d like to continue
-opening the link with.
+Browseratops is an open-source (GPLv3 license), browser prompter for windows,
+and theoretically, for macOS, by virtue of its being a fork of @will-stone's
+phenomenal browserosaurus project. It works by setting itself as the default
+browser; any clicked links in non-browser apps are now sent to Browseratops
+where you are presented with a menu of all your installed browsers. You may now
+decide which app you’d like to continue opening the link with.
 
-<img src="./screenshot.jpg" alt="screenshot" />
+> macOS screenshot of Browserosaurus
+> <img src="./screenshot.jpg" alt="screenshot" />
 
 ## Installation
 
-Download Browserosaurus from the
-[GitHub releases page](https://github.com/will-stone/browserosaurus/releases/latest).
-Select **x64** for Intel machines, or **arm64** for Apple Silicon (M1) machines.
+~~Download Browseratops from the
+[GitHub releases page](https://github.com/riotrah/browseratops/releases/latest).
+Select **x64** for Intel machines, or **arm64** for Apple Silicon (M1)
+machines.~~ ( upstream OG instructions )
 
-Or use [Homebrew](https://formulae.brew.sh/cask/browserosaurus#default). Thank
-you very much to [@i0ntempest](https://github.com/i0ntempest) and
-[@tk4k](https://github.com/tk4k) for keeping this cask updated 🙏
+Hopefully will one day support various windows package managers.
 
-```sh
-brew install --cask browserosaurus
-```
-
-> 🚨 **Please note that Browserosaurus only officially supports the version of
-> macOS that I currently use, which you can assume to be the latest stable
-> version.**
+> 🚨 **Please note that Browseratops only officially supports the version of
+> Windows that I (@riotrah) currently use, which you can assume to be the latest
+> stable version.**
 
 ## Help
 
 Found a bug? Please log an
-[issue](https://github.com/will-stone/browserosaurus/issues). For anything else,
+[issue](https://github.com/riotrah/browseratops/issues). For anything else,
 please see the documentation below or open a
-[discussion](https://github.com/will-stone/browserosaurus/discussions).
+[discussion](https://github.com/riotrah/browseratops/discussions).
 
 ## Documentation
 
-- [Changelog](https://github.com/will-stone/browserosaurus/releases)
-- [Help](https://github.com/will-stone/browserosaurus/discussions/categories/q-a)
+- [Changelog](https://github.com/riotrah/browseratops/releases)
+- [Help](https://github.com/riotrah/browseratops/discussions/categories/q-a)
 - [Supporting a new browser or app](docs/supporting-a-browser-or-app.md)
 - [Setting up for development](docs/setting-up-for-development.md)
 - [Privacy policy](docs/privacy.md)
 
 For the maintainer:
 
-- [Creating menubar icon](docs/creating-menubar-icon.md)
+~~- [Creating menubar icon](docs/creating-menubar-icon.md)~~
+
 - [Publishing](docs/publishing.md)
