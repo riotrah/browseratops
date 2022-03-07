@@ -154,7 +154,7 @@
     "@browser-logos/vivaldi-snapshot": "^1.0.6",
     "@browser-logos/yandex": "^1.0.8",
     "@heroicons/react": "^1.0.5",
-    "@reduxjs/toolkit": "^1.7.2",
+    "@reduxjs/toolkit": "^1.8.0",
     "app-exists": "^2.1.1",
     "axios": "^0.26.0",
     "clsx": "^1.1.1",
