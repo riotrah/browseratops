@@ -1,7 +1,7 @@
 import type { Rectangle } from 'electron/main'
 import type { CombinedState } from 'redux'
 
-import type { WinAppId } from '../../config/apps'
+import type { AppId } from '../../config/apps'
 import type { Data } from '../../shared/state/reducer.data'
 import type { Storage } from '../../shared/state/reducer.storage'
 import { actionNamespacer } from '../../shared/utils/action-namespacer'
@@ -17,7 +17,7 @@ const changedPickerWindowBounds = main<Rectangle>(
 )
 
 const startedScanning = main('installed-apps/scanning')
-const retrievedInstalledApps = main<WinAppId[]>('installed-apps/retrieved')
+const retrievedInstalledApps = main<AppId[]>('installed-apps/retrieved')
 
 const receivedRendererStartupSignal =
   main<CombinedState<{ data: Data; storage: Storage }>>('sync-reducers')
