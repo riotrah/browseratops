@@ -35,14 +35,14 @@ const App: React.FC = () => {
   const keyCodeMap = useKeyCodeMap()
 
   return (
-    <div className="h-screen w-screen select-none flex flex-col items-center relative dark:text-white">
+    <div className="h-screen w-screen select-none flex flex-col items-center relative dark:text-white dark:bg-slate-800">
       {!favApp && (
         <div className="flex justify-center items-center h-full">
           <Spinner />
         </div>
       )}
       <div className="flex-grow w-full flex relative overflow-hidden px-4 pt-2 space-x-4">
-        <div className="flex-shrink-0 pt-2 pb-4">
+        <div className="flex-shrink-0 pt-2 pb-4 flex flex-col">
           {favApp && (
             <AppButton
               ref={favAppRef}
