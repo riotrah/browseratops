@@ -1,6 +1,9 @@
+import { CogIcon } from '@heroicons/react/solid'
+import clsx from 'clsx'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
+import { clickedOpenPrefs } from '../../../main/state/actions'
 import { Spinner } from '../../shared/components/atoms/spinner'
 import { useInstalledApps, useKeyCodeMap } from '../../shared/state/hooks'
 import { favAppRef } from '../refs'
@@ -12,18 +15,15 @@ import { AppButton } from './molecules/app-button'
 import SupportMessage from './organisms/support-message'
 import UrlBar from './organisms/url-bar'
 
-const useAppStarted = () => {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(startedPicker())
-  }, [dispatch])
-}
-
 const App: React.FC = () => {
   /**
    * Tell main that renderer is available
    */
-  useAppStarted()
+  // useAppStarted()
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(startedPicker())
+  }, [dispatch])
 
   /**
    * Setup keyboard listeners
@@ -33,6 +33,8 @@ const App: React.FC = () => {
   const [favApp, ...normalApps] = useInstalledApps()
 
   const keyCodeMap = useKeyCodeMap()
+
+  const launchPrefs = () => dispatch(clickedOpenPrefs())
 
   return (
     <div className="h-screen w-screen select-none flex flex-col items-center relative dark:text-white dark:bg-slate-800">
@@ -56,6 +58,24 @@ const App: React.FC = () => {
               )}
             </AppButton>
           )}
+          <button
+            className={clsx(
+              'rounded-xl',
+              'hover:bg-black hover:bg-opacity-10 border-0',
+              'focus:outline-none',
+              'focus:bg-white dark:focus:bg-black focus:bg-opacity-50 dark:focus:bg-opacity-30',
+              'focus:shadow-xl',
+              'focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500',
+              'focus:hover:ring-black dark:focus:hover:ring-white',
+              'text-xs',
+              'flex place-content-center items-center justify-center space-x-1 px-3 py-1 my-2',
+            )}
+            onClick={launchPrefs}
+            type="button"
+          >
+            <CogIcon className="w-4 h-4 mr-2" />
+            Prefs
+          </button>
         </div>
 
         <div className="relative flex-grow w-full overflow-y-scroll space-y-2 py-2 pr-4 pl-1">
