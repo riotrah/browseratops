@@ -43,8 +43,8 @@ test('kitchen sink', () => {
     Channel.MAIN,
     retrievedInstalledApps([
       'org.mozilla.firefox',
-      'com.apple.Safari',
-      'com.brave.Browser.nightly',
+      'com.google.Chrome',
+      'com.vivaldi.Vivaldi',
     ]),
   )
   // Check apps and app logos shown
@@ -65,9 +65,13 @@ test('kitchen sink', () => {
       storage: {
         apps: [
           { id: 'org.mozilla.firefox', hotCode: null, isInstalled: true },
-          { id: 'com.apple.Safari', hotCode: null, isInstalled: true },
-          { id: 'com.operasoftware.Opera', hotCode: null, isInstalled: false },
-          { id: 'com.brave.Browser.nightly', hotCode: null, isInstalled: true },
+          { id: 'com.microsoft.edgemac', hotCode: null, isInstalled: true },
+          {
+            id: 'com.operasoftware.OperaGX',
+            hotCode: null,
+            isInstalled: false,
+          },
+          { id: 'com.vivaldi.Vivaldi', hotCode: null, isInstalled: true },
         ],
         supportMessage: -1,
         height: 200,
@@ -107,7 +111,7 @@ test('kitchen sink', () => {
     Channel.PICKER,
     addChannelToAction(
       clickedApp({
-        appId: 'com.brave.Browser.nightly',
+        appId: 'com.vivaldi.Vivaldi',
         isAlt: true,
         isShift: false,
       }),
@@ -123,7 +127,9 @@ test('should show spinner when no installed apps are found', () => {
     Channel.MAIN,
     receivedRendererStartupSignal({
       storage: {
-        apps: [{ id: 'com.apple.Safari', hotCode: 'KeyS', isInstalled: false }],
+        apps: [
+          { id: 'com.microsoft.edgemac', hotCode: 'KeyS', isInstalled: false },
+        ],
         supportMessage: -1,
         height: 200,
         isSetup: true,
@@ -139,13 +145,15 @@ test('should use hotkey', () => {
   const win = new electron.BrowserWindow()
   win.webContents.send(
     Channel.MAIN,
-    retrievedInstalledApps(['com.apple.Safari']),
+    retrievedInstalledApps(['com.microsoft.edgemac']),
   )
   win.webContents.send(
     Channel.MAIN,
     receivedRendererStartupSignal({
       storage: {
-        apps: [{ id: 'com.apple.Safari', hotCode: 'KeyS', isInstalled: true }],
+        apps: [
+          { id: 'com.microsoft.edgemac', hotCode: 'KeyS', isInstalled: true },
+        ],
         supportMessage: -1,
         height: 200,
         isSetup: true,
@@ -177,14 +185,16 @@ test('should use hotkey with alt', () => {
   const win = new electron.BrowserWindow()
   win.webContents.send(
     Channel.MAIN,
-    retrievedInstalledApps(['com.apple.Safari']),
+    retrievedInstalledApps(['com.microsoft.edgemac']),
   )
 
   win.webContents.send(
     Channel.MAIN,
     receivedRendererStartupSignal({
       storage: {
-        apps: [{ id: 'com.apple.Safari', hotCode: 'KeyS', isInstalled: true }],
+        apps: [
+          { id: 'com.microsoft.edgemac', hotCode: 'KeyS', isInstalled: true },
+        ],
         supportMessage: -1,
         height: 200,
         isSetup: true,
@@ -262,10 +272,9 @@ test('should order tiles', () => {
     Channel.MAIN,
     retrievedInstalledApps([
       'org.mozilla.firefox',
-      'com.apple.Safari',
-      'com.operasoftware.Opera',
+      'com.operasoftware.OperaGX',
       'com.microsoft.edgemac',
-      'com.brave.Browser',
+      'com.vivaldi.Vivaldi',
     ]),
   )
   // Check tiles and tile logos shown
@@ -276,21 +285,21 @@ test('should order tiles', () => {
   win.webContents.send(
     Channel.MAIN,
     reorderedApp({
-      sourceId: 'com.apple.Safari',
+      sourceId: 'com.microsoft.edgemac',
       destinationId: 'org.mozilla.firefox',
     }),
   )
   win.webContents.send(
     Channel.MAIN,
     reorderedApp({
-      sourceId: 'com.operasoftware.Opera',
+      sourceId: 'com.operasoftware.OperaGX',
       destinationId: 'org.mozilla.firefox',
     }),
   )
   win.webContents.send(
     Channel.MAIN,
     reorderedApp({
-      sourceId: 'com.brave.Browser',
+      sourceId: 'com.vivaldi.Vivaldi',
       destinationId: 'org.mozilla.firefox',
     }),
   )
