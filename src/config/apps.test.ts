@@ -14,7 +14,13 @@ test.each(getKeys(apps))('%s should have a logo', (input) => {
 test.each(getKeys(apps))(
   '%s should not include anything but allowed keys',
   (input) => {
-    const allowedKeys = new Set(['name', 'logo', 'convertUrl', 'privateArg'])
+    const allowedKeys = new Set([
+      'name',
+      'logo',
+      'convertUrl',
+      'privateArg',
+      'win',
+    ])
 
     const unknownKeys = getKeys(apps[input]).filter(
       (key) => !allowedKeys.has(key),

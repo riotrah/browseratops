@@ -43,19 +43,17 @@ test('kitchen sink', () => {
     Channel.MAIN,
     retrievedInstalledApps([
       'org.mozilla.firefox',
-      'com.google.Chrome',
+      'com.microsoft.edgemac',
       'com.vivaldi.Vivaldi',
     ]),
   )
   // Check apps and app logos shown
   expect(screen.getByAltText('Firefox')).toBeVisible()
   expect(screen.getByRole('button', { name: 'Firefox App' })).toBeVisible()
-  expect(screen.getByAltText('Safari')).toBeVisible()
-  expect(screen.getByRole('button', { name: 'Safari App' })).toBeVisible()
-  expect(screen.getByAltText('Brave Nightly')).toBeVisible()
-  expect(
-    screen.getByRole('button', { name: 'Brave Nightly App' }),
-  ).toBeVisible()
+  expect(screen.getByAltText('Edge')).toBeVisible()
+  expect(screen.getByRole('button', { name: 'Edge App' })).toBeVisible()
+  expect(screen.getByAltText('Vivaldi')).toBeVisible()
+  expect(screen.getByRole('button', { name: 'Vivaldi App' })).toBeVisible()
 
   expect(screen.getAllByRole('button', { name: /[A-z]+ App/u })).toHaveLength(3)
 
@@ -104,7 +102,7 @@ test('kitchen sink', () => {
   // Correct info sent to main when app clicked
   const url = 'http://example.com'
   win.webContents.send(Channel.MAIN, openedUrl(url))
-  fireEvent.click(screen.getByRole('button', { name: 'Brave Nightly App' }), {
+  fireEvent.click(screen.getByRole('button', { name: 'Vivaldi App' }), {
     altKey: true,
   })
   expect(electron.ipcRenderer.send).toHaveBeenCalledWith(
@@ -280,7 +278,7 @@ test('should order tiles', () => {
   // Check tiles and tile logos shown
   const apps = screen.getAllByRole('button', { name: /[A-z]+ App/u })
 
-  expect(apps).toHaveLength(5)
+  expect(apps).toHaveLength(4)
 
   win.webContents.send(
     Channel.MAIN,
@@ -306,9 +304,8 @@ test('should order tiles', () => {
 
   const updatedApps = screen.getAllByRole('button', { name: /[A-z]+ App/u })
 
-  expect(updatedApps[0]).toHaveAttribute('aria-label', 'Safari App')
-  expect(updatedApps[1]).toHaveAttribute('aria-label', 'Opera App')
-  expect(updatedApps[2]).toHaveAttribute('aria-label', 'Brave App')
+  expect(updatedApps[0]).toHaveAttribute('aria-label', 'Edge App')
+  expect(updatedApps[1]).toHaveAttribute('aria-label', 'Opera GX App')
+  expect(updatedApps[2]).toHaveAttribute('aria-label', 'Vivaldi App')
   expect(updatedApps[3]).toHaveAttribute('aria-label', 'Firefox App')
-  expect(updatedApps[4]).toHaveAttribute('aria-label', 'Edge App')
 })
