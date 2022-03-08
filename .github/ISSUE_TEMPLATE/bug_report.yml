@@ -1,5 +1,5 @@
 name: Bug report
-description: File a bug to help us fix any issues happening with Browserosaurus
+description: File a bug to help us fix any issues happening with Browseratops
 labels: [bug]
 body:
   - type: checkboxes
@@ -13,12 +13,12 @@ body:
           required: true
         - label:
             I have searched the [discussions
-            forum](https://github.com/will-stone/browserosaurus/discussions)
+            forum](https://github.com/riotrah/browseratops/discussions)
           required: true
         - label:
             I understand this form is for reporting bugs, and not for requesting
             [support for new browsers or
-            apps](https://github.com/will-stone/browserosaurus/blob/master/docs/supporting-a-browser-or-app.md).
+            apps](https://github.com/riotrah/browseratops/blob/master/docs/supporting-a-browser-or-app.md).
           required: true
   - type: textarea
     attributes:
@@ -45,14 +45,14 @@ body:
       required: true
   - type: input
     attributes:
-      label: Browserosaurus version
+      label: Browseratops version
       description: This can be found in Preferences > About
       placeholder: 'e.g. 15.1.3'
     validations:
       required: true
   - type: input
     attributes:
-      label: macOS version
+      label: OS version
       placeholder: 'e.g. 11.6'
     validations:
       required: true

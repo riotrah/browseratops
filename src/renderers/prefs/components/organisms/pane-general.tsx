@@ -55,7 +55,7 @@ export const GeneralPane = (): JSX.Element => {
         <Left>Default web browser:</Left>
         <Right>
           {isDefaultProtocolClient ? (
-            'Browserosaurus is the default web browser'
+            'Browseratops is the default web browser'
           ) : (
             <Button
               onClick={() => dispatch(clickedSetAsDefaultBrowserButton())}
@@ -64,10 +64,10 @@ export const GeneralPane = (): JSX.Element => {
             </Button>
           )}
           <p className="text-sm mt-2 opacity-70">
-            Setting Browserosaurus as your default web browser means links
-            clicked outside of web browsers will open the picker window. This is
-            the primary design of Browserosaurus. However, you can also
-            programmatically send URLs to Browserosaurus.
+            Setting Browseratops as your default web browser means links outside
+            of web browsers will open the picker window. This is the primary
+            design of Browseratops. However, you can also programmatically send
+            URLs to Browseratops.
           </p>
         </Right>
       </Row>
@@ -78,7 +78,7 @@ export const GeneralPane = (): JSX.Element => {
           <Button onClick={() => dispatch(clickedRescanApps())}>Rescan</Button>
           <p className="text-sm mt-2 opacity-70">
             {numberOfInstalledApps} compatible apps found. Rescan if you have
-            added or removed a compatible app whilst Browserosaurus is running.
+            added or removed a compatible app whilst Browseratops is running.
           </p>
         </Right>
       </Row>

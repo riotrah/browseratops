@@ -52,7 +52,7 @@ const UrlBar: React.FC<Props> = ({ className }) => {
         )}
         <span>{parsedUrl.scheme && `${parsedUrl.scheme}://`}</span>
         <span className="text-opacity-100 dark:text-opacity-100 text-black dark:text-white">
-          {parsedUrl.host || <span className="opacity-30">Browserosaurus</span>}
+          {parsedUrl.host || <span className="opacity-30">Browseratops</span>}
         </span>
         <span>
           {parsedUrl.port && `:${parsedUrl.port}`}

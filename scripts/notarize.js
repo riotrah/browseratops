@@ -6,12 +6,12 @@ const path = require('path')
 const notarizeArch = (arch) =>
   notarize({
     tool: 'notarytool',
-    appBundleId: 'com.browserosaurus',
+    appBundleId: 'com.browseratops',
     appPath: path.join(
       '.',
       'out',
-      `Browserosaurus-darwin-${arch}64`,
-      'Browserosaurus.app',
+      `Browseratops-darwin-${arch}64`,
+      'Browseratops.app',
     ),
     keychain: '~/Library/Keychains/login.keychain-db',
     keychainProfile: 'AC_PASSWORD',

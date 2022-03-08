@@ -19,11 +19,11 @@ export const AboutPane = (): JSX.Element => {
       <div className="text-center">
         <img alt="Logo" className="inline-block w-40" src={icon} />
         <h1 className="text-4xl tracking-wider mb-2 text-gray-900 dark:text-gray-50">
-          Browserosaurus
+          Browseratops
         </h1>
-        <p className="text-xl mb-8">The browser prompter for macOS</p>
+        <p className="text-xl mb-8">The browser prompter for Windows</p>
         <p className="mb-4 opacity-70">Version {version}</p>
-        <p className="mb-8">Copyright © Will Stone</p>
+        <p className="mb-8">Copyright © Rayat Rahman</p>
         <div className="space-x-4">
           <Button onClick={() => dispatch(clickedHomepageButton())}>
             Homepage

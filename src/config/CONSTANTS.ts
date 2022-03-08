@@ -1,3 +1,3 @@
-export const CARROT_URL = 'https://www.buymeacoffee.com/wstone'
-export const B_URL = 'https://github.com/will-stone/browserosaurus'
-export const ISSUES_URL = 'https://github.com/will-stone/browserosaurus/issues'
+export const CARROT_URL = 'https://www.buymeacoffee.com/riotrah'
+export const B_URL = 'https://github.com/riotrah/browseratops'
+export const ISSUES_URL = 'https://github.com/riotrah/browseratops/issues'
