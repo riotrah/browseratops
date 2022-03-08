@@ -1,9 +1,9 @@
 import { execFile } from 'child_process'
 import path from 'path'
 
-import type { App, AppId } from '../../config/apps'
+import type { AppId } from '../../config/apps'
 import { appHasWin, apps } from '../../config/apps'
-import { getOS } from './../../shared/utils/platform-utils'
+import { getOS } from '../../shared/utils/platform-utils'
 
 export function openApp(
   appId: AppId,
@@ -13,13 +13,8 @@ export function openApp(
 ): void {
   const selectedApp = apps[appId]
 
-  const processedUrlTemplate =
-    'urlTemplate' in selectedApp
-      ? (selectedApp as App & { urlTemplate: string }).urlTemplate.replace(
-          /\{\{URL\}\}/u,
-          url,
-        )
-      : url
+  const convertedUrl =
+    'convertUrl' in selectedApp ? selectedApp.convertUrl(url) : url
 
   switch (getOS().os) {
     case 'win32': {
@@ -33,7 +28,7 @@ export function openApp(
           isShift && 'privateArg' in selectedApp
             ? selectedApp.privateArg // eslint-disable-line unicorn/consistent-destructuring
             : '',
-          processedUrlTemplate,
+          convertedUrl,
         ] as const
 
         const openArguments = _openArguments.filter(Boolean).flat()
@@ -57,7 +52,7 @@ export function openApp(
           : [],
         // In order for private/incognito mode to work the URL needs to be passed
         // in last, _after_ the respective app.privateArg flag
-        processedUrlTemplate,
+        convertedUrl,
       ] as const
 
       const openArguments = _openArguments.filter(Boolean).flat()

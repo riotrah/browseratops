@@ -32,11 +32,13 @@ import yandex from '@browser-logos/yandex/yandex_128x128.png'
 import dissenter from './logos/dissenter.png'
 import figma from './logos/figma.png'
 import finicky from './logos/finicky.png'
+import freetube from './logos/freetubeapp.png'
 import librewolf from './logos/librewolf.png'
 import linear from './logos/linear.png'
 import min from './logos/min.png'
 import miro from './logos/miro.png'
 import naverWhale from './logos/NAVER_whale.png'
+import notion from './logos/notion.png'
 import orion from './logos/orion.png'
 import pocket from './logos/pocket.png'
 import polypane from './logos/polypane.png'
@@ -47,7 +49,16 @@ import wavebox from './logos/wavebox.png'
 import yattee from './logos/yattee.png'
 import zoom from './logos/zoom.png'
 
-export const apps = {
+interface _App {
+  name: string
+  logo: string
+  privateArg?: string
+  convertUrl?: (url: string) => string
+}
+
+const typeApps = <T extends Record<string, _App>>(apps: T) => apps
+
+export const apps = typeApps({
   'com.brave.Browser': {
     name: 'Brave',
     privateArg: '--incognito',
@@ -148,6 +159,10 @@ export const apps = {
     privateArg: '--private-window',
     logo: firefoxNightly,
   },
+  'io.freetubeapp.freetube': {
+    name: 'FreeTube',
+    logo: freetube,
+  },
   'de.iridiumbrowser': {
     name: 'Iridium',
     logo: iridium,
@@ -175,6 +190,10 @@ export const apps = {
   'com.naver.Whale': {
     name: 'NAVER Whale',
     logo: naverWhale,
+  },
+  'notion.id': {
+    name: 'Notion',
+    logo: notion,
   },
   'com.operasoftware.Opera': {
     name: 'Opera',
@@ -206,7 +225,7 @@ export const apps = {
   },
   'com.readitlater.PocketMac': {
     name: 'Pocket',
-    urlTemplate: 'pocket://add?url={{URL}}',
+    convertUrl: (url) => `pocket://add?url=${url}`,
     logo: pocket,
   },
   'com.firstversionist.polypane': {
@@ -271,7 +290,7 @@ export const apps = {
     name: 'Zoom',
     logo: zoom,
   },
-} as const
+})
 
 export type Apps = typeof apps
 
