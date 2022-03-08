@@ -7,6 +7,21 @@ import { ifMac, ifWindows } from '../shared/utils/platform-utils'
 import { openedUrl, readiedApp } from './state/actions'
 import { dispatch, getState } from './state/store'
 
+const environment = process.env.NODE_ENV || 'development'
+
+// If development environment
+if (environment === 'development') {
+  try {
+    // eslint-disable-next-line node/global-require, @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports
+    require('electron-reloader')(module, {
+      ignore: 'src',
+      debug: true,
+      watchRenderer: true,
+    })
+    // eslint-disable-next-line no-empty
+  } catch {}
+}
+
 // Attempt to fix this bug: https://github.com/electron/electron/issues/20944
 ifMac(() => app.commandLine.appendArgument('--enable-features=Metal'))
 ifWindows(() => app.disableHardwareAcceleration())
