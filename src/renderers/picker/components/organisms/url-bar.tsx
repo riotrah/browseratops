@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { parse } from 'uri-js'
 
 import { CARROT_URL } from '../../../../config/CONSTANTS'
+import { switchOS } from '../../../../shared/utils/platform-utils'
 import { useSelector } from '../../../shared/state/hooks'
 import { clickedUrlBar } from '../../state/actions'
 
@@ -28,10 +29,21 @@ const UrlBar: React.FC<Props> = ({ className }) => {
       onKeyDown={() => false}
       role="button"
       tabIndex={-1}
-      title="Click to copy (⌘ + C)"
+      title={`Click to copy (${switchOS({ mac: '⌘', windows: 'CTRL' })} + C)`}
     >
       <div
-        className="flex-grow tracking-wider text-opacity-50 dark:text-opacity-50 text-black dark:text-white"
+        className={clsx(
+          'rounded-xl',
+          'w-min',
+          'py-3',
+          'flex-grow tracking-wider text-opacity-50 dark:text-opacity-50 text-black dark:text-white',
+          'hover:bg-black hover:bg-opacity-10 border-0',
+          'focus:outline-none',
+          'focus:bg-white dark:focus:bg-black focus:bg-opacity-50 dark:focus:bg-opacity-30',
+          'focus:shadow-xl',
+          'focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500',
+          'focus:hover:ring-black dark:focus:hover:ring-white',
+        )}
         style={{
           display: '-webkit-box',
           WebkitLineClamp: 2,

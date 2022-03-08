@@ -7,7 +7,7 @@ test('should copy string', () => {
   copyUrlToClipboard('string')
   expect(clipboard.readText()).toBe('string')
   expect(notificationSpy).toHaveBeenCalledWith({
-    title: 'Browserosaurus',
+    title: 'Browseratops',
     body: 'URL copied to clipboard',
     silent: true,
   })

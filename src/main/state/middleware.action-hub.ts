@@ -23,6 +23,7 @@ import {
 } from '../../renderers/prefs/state/actions'
 import type { Middleware } from '../../shared/state/model'
 import type { RootState } from '../../shared/state/reducer.root'
+import { ifMac } from '../../shared/utils/platform-utils'
 import { database } from '../database'
 import { createTray, tray } from '../tray'
 import copyUrlToClipboard from '../utils/copy-url-to-clipboard'
@@ -89,7 +90,7 @@ export const actionHubMiddleware =
     // Main's process is ready
     if (readiedApp.match(action)) {
       // Hide from dock and cmd-tab
-      app.dock.hide()
+      ifMac(() => app.dock.hide())
       createWindows()
       createTray()
       initUpdateChecker()

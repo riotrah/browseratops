@@ -2,6 +2,11 @@ const CopyPlugin = require('copy-webpack-plugin')
 const rules = require('./webpack.rules.cjs')
 const path = require('path')
 
+rules.push({
+  test: /\.(png|jpg|gif|svg)$/iu,
+  type: 'asset',
+})
+
 module.exports = {
   /**
    * This is the main entry point for your application, it's the first file

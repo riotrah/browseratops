@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import icon from '../../../../shared/static/icon/icon.png'
 import Button from '../../../shared/components/atoms/button'
+import { openURL } from '../../../shared/state/actions'
 import { useSelector } from '../../../shared/state/hooks'
 import {
   clickedHomepageButton,
@@ -32,6 +33,13 @@ export const AboutPane = (): JSX.Element => {
             Report an Issue
           </Button>
         </div>
+        <button
+          className="mt-4 opacity-70"
+          onClick={() => dispatch(openURL('https://icons8.com'))}
+          type="button"
+        >
+          Icons taken graciously from icons8
+        </button>
       </div>
     </Pane>
   )

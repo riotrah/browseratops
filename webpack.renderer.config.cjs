@@ -5,7 +5,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 rules.push(
   {
     test: /\.(png|jpg|gif|svg)$/iu,
-    use: 'url-loader',
+    type: 'asset',
   },
   {
     test: /\.css$/u,

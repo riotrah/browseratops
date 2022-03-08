@@ -1,6 +1,7 @@
 import { app, BrowserWindow, screen } from 'electron'
 import path from 'path'
 
+import { iconExtension, ifMac, ifWindows } from '../shared/utils/platform-utils'
 import { database } from './database'
 import {
   changedPickerWindowBounds,
@@ -19,6 +20,7 @@ export let prefsWindow: BrowserWindow | null | undefined
 
 export async function createWindows(): Promise<void> {
   prefsWindow = new BrowserWindow({
+    ...ifWindows({ autoHideMenuBar: true }, {}),
     // Only show on demand
     show: false,
 
@@ -36,7 +38,7 @@ export async function createWindows(): Promise<void> {
     vibrancy: 'window',
 
     // Meta
-    icon: path.join(__dirname, '/static/icon/icon.png'),
+    icon: path.join(__dirname, `/static/icon/icon.${iconExtension()}`),
     title: 'Preferences',
 
     webPreferences: {
@@ -67,8 +69,8 @@ export async function createWindows(): Promise<void> {
 
   pickerWindow = new BrowserWindow({
     frame: true,
-    icon: path.join(__dirname, '/static/icon/icon.png'),
-    title: 'Browserosaurus',
+    icon: path.join(__dirname, `/static/icon/icon.${iconExtension()}`),
+    title: 'Browseratops',
     webPreferences: {
       preload: PICKER_WINDOW_PRELOAD_WEBPACK_ENTRY,
       nodeIntegration: false,
@@ -97,7 +99,7 @@ export async function createWindows(): Promise<void> {
     alwaysOnTop: true,
   })
 
-  pickerWindow.setWindowButtonVisibility(false)
+  ifMac(() => pickerWindow?.setWindowButtonVisibility(false))
 
   pickerWindow.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true })
 

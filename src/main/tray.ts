@@ -18,26 +18,30 @@ export function createTray(): void {
 
   tray.setToolTip('Browseratops')
 
-  tray.setContextMenu(
-    Menu.buildFromTemplate([
-      {
-        label: 'Restore recently closed URL',
-        click: () => dispatch(clickedRestorePicker()),
-      },
-      {
-        type: 'separator',
-      },
-      {
-        label: 'Preferences...',
-        click: () => dispatch(clickedOpenPrefs()),
-      },
-      {
-        type: 'separator',
-      },
-      {
-        label: 'Quit',
-        click: () => app.exit(),
-      },
-    ]),
-  )
+  const menu = Menu.buildFromTemplate([
+    {
+      label: 'Restore recently closed URL',
+      click: () => dispatch(clickedRestorePicker()),
+    },
+    {
+      type: 'separator',
+    },
+    {
+      label: 'Preferences...',
+      click: () => dispatch(clickedOpenPrefs()),
+    },
+    {
+      type: 'separator',
+    },
+    {
+      label: 'Quit',
+      click: () => app.exit(),
+    },
+  ])
+
+  tray.setContextMenu(menu)
+
+  tray.on('click', () => {
+    tray?.popUpContextMenu(menu)
+  })
 }

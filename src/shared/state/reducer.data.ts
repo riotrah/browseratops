@@ -21,7 +21,7 @@ import {
   confirmedReset,
   startedPrefs,
 } from '../../renderers/prefs/state/actions'
-import { gotKeyLayoutMap } from '../../renderers/shared/state/actions'
+import { gotKeyLayoutMap, openURL } from '../../renderers/shared/state/actions'
 import { backspaceUrlParse } from '../utils/backspace-url-parse'
 
 export type PrefsTab = 'about' | 'apps' | 'general'
@@ -101,6 +101,10 @@ export const data = createReducer<Data>(defaultData, (builder) =>
 
     .addCase(clickedDonate, (state) => {
       state.url = CARROT_URL
+    })
+
+    .addCase(openURL, (state, action) => {
+      state.url = action.payload
     })
 
     .addCase(clickedTabButton, (state, action) => {
