@@ -1,7 +1,9 @@
 import { execFile } from 'child_process'
+import path from 'path'
 
-import type { AppId } from '../../config/apps'
-import { apps } from '../../config/apps'
+import type { App, AppId } from '../../config/apps'
+import { appHasWin, apps } from '../../config/apps'
+import { getOS } from './../../shared/utils/platform-utils'
 
 export function openApp(
   appId: AppId,
@@ -13,22 +15,59 @@ export function openApp(
 
   const processedUrlTemplate =
     'urlTemplate' in selectedApp
-      ? selectedApp.urlTemplate.replace(/\{\{URL\}\}/u, url)
+      ? (selectedApp as App & { urlTemplate: string }).urlTemplate.replace(
+          /\{\{URL\}\}/u,
+          url,
+        )
       : url
 
-  const openArguments: string[] = [
-    '-b',
-    appId,
-    isAlt ? '--background' : [],
-    isShift && 'privateArg' in selectedApp
-      ? ['--new', '--args', selectedApp.privateArg]
-      : [],
-    // In order for private/incognito mode to work the URL needs to be passed
-    // in last, _after_ the respective app.privateArg flag
-    processedUrlTemplate,
-  ]
-    .filter(Boolean)
-    .flat()
+  switch (getOS().os) {
+    case 'win32': {
+      if (appHasWin(selectedApp)) {
+        const { win } = selectedApp
+        const { path: winPath, filename } = win
 
-  execFile('open', openArguments)
+        const filePath = path.join(winPath, filename)
+
+        const _openArguments = [
+          isShift && 'privateArg' in selectedApp
+            ? selectedApp.privateArg // eslint-disable-line unicorn/consistent-destructuring
+            : '',
+          processedUrlTemplate,
+        ] as const
+
+        const openArguments = _openArguments.filter(Boolean).flat()
+
+        // "C:\program files\Google\Chrome\Application\chrome.exe" --profile-directory=Default msn.com
+        execFile(filePath, openArguments)
+      } else {
+        throw new Error(`App ${appId} does not have a win config`)
+      }
+
+      break
+    }
+
+    case 'darwin': {
+      const _openArguments = [
+        '-b',
+        appId,
+        isAlt ? '--background' : [],
+        isShift && 'privateArg' in selectedApp
+          ? (['--new', '--args', selectedApp.privateArg] as const)
+          : [],
+        // In order for private/incognito mode to work the URL needs to be passed
+        // in last, _after_ the respective app.privateArg flag
+        processedUrlTemplate,
+      ] as const
+
+      const openArguments = _openArguments.filter(Boolean).flat()
+
+      execFile('open', openArguments)
+      break
+    }
+
+    default: {
+      throw new Error(`Unsupported OS: ${getOS().os}`)
+    }
+  }
 }

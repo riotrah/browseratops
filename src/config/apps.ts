@@ -28,7 +28,6 @@ import tor from '@browser-logos/tor/tor_128x128.png'
 import vivaldi from '@browser-logos/vivaldi/vivaldi_128x128.png'
 import vivaldiSnapshot from '@browser-logos/vivaldi-snapshot/vivaldi-snapshot_128x128.png'
 import yandex from '@browser-logos/yandex/yandex_128x128.png'
-import type { ValueKeyIterateeTypeGuard } from 'lodash'
 
 import dissenter from './logos/dissenter.png'
 import figma from './logos/figma.png'
@@ -288,6 +287,6 @@ export type WinAppId = keyof WinApps
 
 export type WinApp = WinApps[WinAppId]
 
-export const appHasWin: ValueKeyIterateeTypeGuard<App, WinApp> = (
-  app: App,
-): app is WinApp => 'win' in app && Boolean(app.win.path)
+export function appHasWin(app: App): app is WinApp {
+  return 'win' in app && Boolean(app.win.path)
+}

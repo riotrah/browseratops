@@ -3,11 +3,13 @@ import electron, { app } from 'electron'
 import sleep from 'tings/lib/sleep'
 
 import { Channel } from '../shared/state/channels'
+import { ifMac, ifWindows } from '../shared/utils/platform-utils'
 import { openedUrl, readiedApp } from './state/actions'
 import { dispatch, getState } from './state/store'
 
 // Attempt to fix this bug: https://github.com/electron/electron/issues/20944
-app.commandLine.appendArgument('--enable-features=Metal')
+ifMac(() => app.commandLine.appendArgument('--enable-features=Metal'))
+ifWindows(() => app.disableHardwareAcceleration())
 
 app.on('ready', () => dispatch(readiedApp()))
 

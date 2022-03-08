@@ -65,18 +65,21 @@ export const ifLinux = <T>(
   }
 } */
 
-export function switchOS<T>({
-  windows,
-  mac,
-  linux,
-}: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  windows?: AnyFunction | T
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  mac?: AnyFunction | T
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  linux?: AnyFunction | T
-}): void {
+export function switchOS<T>(
+  {
+    windows,
+    mac,
+    linux,
+  }: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    windows?: T | ((...arguments_: any[]) => T)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    mac?: T | ((...arguments_: any[]) => T)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    linux?: T | ((...arguments_: any[]) => T)
+  },
+  fallback?: T | undefined,
+): T | undefined {
   if (getOS().isWindows) {
     return isFunction(windows) ? windows() : windows
   } else if (getOS().isMac) {
@@ -84,6 +87,8 @@ export function switchOS<T>({
   } else if (getOS().isLinux) {
     return isFunction(linux) ? linux() : linux
   }
+
+  return fallback
 }
 
 export function iconExtension(): string {

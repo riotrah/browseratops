@@ -1,7 +1,12 @@
 import { app, BrowserWindow, screen } from 'electron'
 import path from 'path'
 
-import { iconExtension, ifMac, ifWindows } from '../shared/utils/platform-utils'
+import {
+  iconExtension,
+  ifMac,
+  ifWindows,
+  switchOS,
+} from '../shared/utils/platform-utils'
 import { database } from './database'
 import {
   changedPickerWindowBounds,
@@ -21,9 +26,9 @@ export let prefsWindow: BrowserWindow | null | undefined
 export async function createWindows(): Promise<void> {
   prefsWindow = new BrowserWindow({
     ...ifWindows({ autoHideMenuBar: true }, {}),
+    ...ifMac({ vibrancy: 'window' }, {}),
     // Only show on demand
     show: false,
-
     // Chrome
     height: 500,
     width: 600,
@@ -33,9 +38,9 @@ export async function createWindows(): Promise<void> {
     maximizable: false,
     fullscreen: false,
     fullscreenable: false,
-    transparent: true,
+    transparent: switchOS({ windows: false, mac: true }),
     titleBarStyle: 'hidden',
-    vibrancy: 'window',
+    hasShadow: true,
 
     // Meta
     icon: path.join(__dirname, `/static/icon/icon.${iconExtension()}`),
@@ -50,8 +55,10 @@ export async function createWindows(): Promise<void> {
     },
   })
 
-  prefsWindow.on('hide', () => {
-    prefsWindow?.hide()
+  ifMac(() => {
+    prefsWindow?.on('hide', () => {
+      prefsWindow?.hide()
+    })
   })
 
   prefsWindow.on('close', (event_) => {
@@ -68,6 +75,13 @@ export async function createWindows(): Promise<void> {
   const height = database.get('height')
 
   pickerWindow = new BrowserWindow({
+    ...ifMac(
+      {
+        vibrancy: 'tooltip',
+        visualEffectState: 'active',
+      },
+      {},
+    ),
     frame: true,
     icon: path.join(__dirname, `/static/icon/icon.${iconExtension()}`),
     title: 'Browseratops',
@@ -91,10 +105,8 @@ export async function createWindows(): Promise<void> {
     fullscreenable: false,
     movable: false,
     resizable: true,
-    transparent: true,
+    transparent: switchOS({ windows: false, mac: true }),
     hasShadow: true,
-    vibrancy: 'tooltip',
-    visualEffectState: 'active',
     titleBarStyle: 'hidden',
     alwaysOnTop: true,
   })
@@ -103,8 +115,10 @@ export async function createWindows(): Promise<void> {
 
   pickerWindow.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true })
 
-  pickerWindow.on('hide', () => {
-    pickerWindow?.hide()
+  ifMac(() => {
+    pickerWindow?.on('hide', () => {
+      pickerWindow?.hide()
+    })
   })
 
   pickerWindow.on('close', (event_) => {
