@@ -1,6 +1,6 @@
-<img src="./designs/icon_squooshed.png" alt="logo" width="100" height="100" align="right" />
+<img src="./src/shared/static/icon/icon.png" alt="logo" width="100" height="100" align="right" />
 
-# Browseratops
+# Browseratops [![Build](https://github.com/riotrah/browseratops/actions/workflows/build.yml/badge.svg)](https://github.com/riotrah/browseratops/actions/workflows/build.yml)
 
 Browseratops is an open-source (GPLv3 license), browser prompter for windows,
 and theoretically, for macOS, by virtue of its being a fork of @will-stone's
@@ -9,7 +9,7 @@ browser; any clicked links in non-browser apps are now sent to Browseratops
 where you are presented with a menu of all your installed browsers. You may now
 decide which app you’d like to continue opening the link with.
 
-> macOS screenshot of Browserosaurus
+> obsolete and technically irrelevant macOS screenshot of Browserosaurus
 > <img src="./screenshot.jpg" alt="screenshot" />
 
 ## Installation
