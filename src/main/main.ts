@@ -9,7 +9,7 @@ import { dispatch, getState } from './state/store'
 
 const environment = process.env.NODE_ENV || 'development'
 
-// If development environment
+// If development environment, use hot reloading
 if (environment === 'development') {
   try {
     // eslint-disable-next-line node/global-require, @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports
