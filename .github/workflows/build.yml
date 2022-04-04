@@ -50,6 +50,7 @@ jobs:
       - run: npm run typecheck
       - run: npm run test
       - run: npm run package
+      - run: npm run make
       #       - name: Generate Changelog
       #         id: changelog
       #         uses: mindsers/changelog-reader-action@v2
