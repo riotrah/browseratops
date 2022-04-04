@@ -37,12 +37,12 @@ jobs:
       - run: npm run typecheck
       - run: npm run test
       - run: npm run package
-      - name: Generate Changelog
-        id: changelog
-        uses: mindsers/changelog-reader-action@v2
-        with:
-            version: ${{ env.PACKAGE_VERSION }}
-            path: ./CHANGELOG.md
+#       - name: Generate Changelog
+#         id: changelog
+#         uses: mindsers/changelog-reader-action@v2
+#         with:
+#             version: ${{ env.PACKAGE_VERSION }}
+#             path: ./CHANGELOG.md
       - name: Create GitHub release
         id: create_release
         uses: actions/create-release@v1
@@ -51,7 +51,7 @@ jobs:
         with:
             tag_name: ${{ github.ref }}
             release_name: v${{ env.PACKAGE_VERSION }}
-            body: ${{ steps.changelog.outputs.changes }}
+#             body: ${{ steps.changelog.outputs.changes }}
             draft: false
             prerelease: true
       - name: Upload GitHub release
