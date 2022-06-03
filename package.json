@@ -238,7 +238,7 @@
     "electron-notarize": "^1.1.1",
     "electron-reload": "^2.0.0-alpha.1",
     "electron-reloader": "^1.2.3",
-    "eslint": "^8.10.0",
+    "eslint": "^8.16.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jest": "^26.1.1",
     "eslint-plugin-jsx-a11y": "^6.5.1",
