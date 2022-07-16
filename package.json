@@ -237,7 +237,7 @@
     "copy-webpack-plugin": "^10.2.4",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.0",
-    "electron": "^16.0.9",
+    "electron": "^16.2.8",
     "electron-forge-maker-nsis-web": "^23.2.0",
     "electron-notarize": "^1.1.1",
     "electron-reload": "^2.0.0-alpha.1",
