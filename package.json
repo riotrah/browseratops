@@ -91,6 +91,9 @@
             "darwin",
             "win32"
           ]
+        },
+        {
+          "name": "electron-forge-maker-nsis-web"
         }
       ],
       "plugins": [
@@ -235,6 +238,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.0",
     "electron": "^16.0.9",
+    "electron-forge-maker-nsis-web": "^23.2.0",
     "electron-notarize": "^1.1.1",
     "electron-reload": "^2.0.0-alpha.1",
     "electron-reloader": "^1.2.3",
