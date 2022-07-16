@@ -1,6 +1,6 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "peacock.color": "#234870",
+  "peacock.color": "#f9e64f",
   "typescript.preferences.importModuleSpecifier": "relative",
   "cSpell.words": [
     "fullscreenable",
@@ -17,5 +17,13 @@
   },
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
-  }
+  },
+  "workbench.colorCustomizations": {
+    "sash.hoverBorder": "#fbed80",
+    "titleBar.activeBackground": "#f9e64f",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#f9e64f99",
+    "titleBar.inactiveForeground": "#15202b99"
+  },
+  "editor.fontFamily": "'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace"
 }

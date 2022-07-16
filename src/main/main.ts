@@ -1,5 +1,6 @@
 import type { AnyAction } from '@reduxjs/toolkit'
 import electron, { app } from 'electron'
+import path from 'path'
 import sleep from 'tings/lib/sleep'
 
 import { Channel } from '../shared/state/channels'
@@ -25,6 +26,21 @@ if (environment === 'development') {
 // Attempt to fix this bug: https://github.com/electron/electron/issues/20944
 ifMac(() => app.commandLine.appendArgument('--enable-features=Metal'))
 ifWindows(() => app.disableHardwareAcceleration())
+ifWindows(() => {
+  if (process.defaultApp) {
+    if (process.argv.length >= 2) {
+      app.setAsDefaultProtocolClient('http', process.execPath, [
+        path.resolve(process.argv[1]),
+      ])
+      app.setAsDefaultProtocolClient('https', process.execPath, [
+        path.resolve(process.argv[1]),
+      ])
+    }
+  } else {
+    app.setAsDefaultProtocolClient('http')
+    app.setAsDefaultProtocolClient('https')
+  }
+})
 
 app.on('ready', () => dispatch(readiedApp()))
 
