@@ -278,7 +278,7 @@
     "version-bump-prompt": "^6.1.0"
   },
   "engines": {
-    "node": ">=16.14.0"
+    "node": ">=18.7.0"
   },
   "productName": "Browseratops",
   "release-it": {
